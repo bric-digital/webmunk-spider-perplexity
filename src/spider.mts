@@ -1,4 +1,4 @@
-import webmunkSpiderManager { WebmunkContentSpider } from '@bric/webmunk-spider/spider'
+import webmunkSpiderManager, { WebmunkContentSpider } from '@bric/webmunk-spider/spider'
 
 export class WebmunkPerplexityContentSpider extends WebmunkContentSpider {
   urlMatches(url:string): boolean {
