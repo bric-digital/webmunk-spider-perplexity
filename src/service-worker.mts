@@ -34,8 +34,8 @@ const stripRule = {
   action: {
     type: 'modifyHeaders' as const,
     responseHeaders: [
-      { header: 'x-frame-options', operation: 'remove' },
-      { header: 'content-security-policy', operation: 'remove' }
+      { header: 'x-frame-options', operation: 'remove' as const },
+      { header: 'content-security-policy', operation: 'remove' as const }
     ]
   },
   condition: { urlFilter, resourceTypes: ['main_frame' as const, 'sub_frame' as const] }
