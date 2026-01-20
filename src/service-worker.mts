@@ -32,7 +32,7 @@ const stripRule = {
   id: stringToId('perplexity-strip'),
   priority: 1,
   action: {
-    type: 'modifyHeaders',
+    type: 'modifyHeaders' as const,
     responseHeaders: [
       { header: 'x-frame-options', operation: 'remove' },
       { header: 'content-security-policy', operation: 'remove' }
