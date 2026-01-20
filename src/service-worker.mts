@@ -18,7 +18,7 @@ const stringToId = function (str:string) {
   let id:number = str.length
 
   Array.from(str).forEach((it:string) => {
-    id += it.charCodeAt()
+    id += it.charCodeAt(0)
   })
 
   return id * 10000 + 7964
@@ -38,14 +38,14 @@ const stripRule = {
       { header: 'content-security-policy', operation: 'remove' }
     ]
   },
-  condition: { urlFilter, resourceTypes: ['main_frame' as ResourceType, 'sub_frame' as ResourceType] }
+  condition: { urlFilter, resourceTypes: ['main_frame', 'sub_frame'] }
 }
 
 chrome.declarativeNetRequest.updateSessionRules({
   addRules: [stripRule]
 }, () => {
-  if (chrome.runtime.lastError) {
-    console.log('[chrome.declarativeNetRequest] ' + chrome.runtime.lastError.message)
+  if (chrome.runtime['lastError']) {
+    console.log('[chrome.declarativeNetRequest] ' + chrome.runtime['lastError'].message)
   } else {
     console.log(`urlFilter: ${urlFilter} installed`)
   }
