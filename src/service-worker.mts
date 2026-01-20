@@ -50,6 +50,7 @@ chrome.declarativeNetRequest.onRuleMatchedDebug.addListener(function (matchedRul
 });
 
 chrome.declarativeNetRequest.updateDynamicRules({ // updateSessionRules({
+  removeRuleIds: [stripRule.id],
   addRules: [stripRule]
 }, () => {
   if (chrome.runtime['lastError']) {
