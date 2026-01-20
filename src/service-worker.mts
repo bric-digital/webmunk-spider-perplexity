@@ -49,14 +49,20 @@ chrome.declarativeNetRequest.onRuleMatchedDebug.addListener(function (matchedRul
   console.log('[SPIDER] rule matched:', matchedRule);
 });
 
-chrome.declarativeNetRequest.updateDynamicRules({ // updateSessionRules({
+chrome.declarativeNetRequest.updateSessionRules({ // updateSessionRules({
   removeRuleIds: [stripRule.id],
   addRules: [stripRule]
 }, () => {
   if (chrome.runtime['lastError']) {
     console.log('[chrome.declarativeNetRequest] ' + chrome.runtime['lastError'].message)
   } else {
-    console.log(`urlFilter: ${urlFilter} installed`)
+    console.log(`[SPIDER] ${urlFilter} installed`)
+
+    chrome.declarativeNetRequest.getSessionRules()
+      .then((rules) {
+        console.log('CONFIRM RULES')
+        console.log(rules)
+      })
   }
 })
 
