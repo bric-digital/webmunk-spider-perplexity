@@ -29,7 +29,7 @@ const urlFilter = '||perplexity.ai/'
 console.log(`urlFilter: ${urlFilter}`)
 
 const stripRule = {
-  id: stringToId('perplexity-strip'),
+  id: stringToId('perplexity-strip-12345'),
   priority: 1,
   action: {
     type: 'modifyHeaders' as const,
