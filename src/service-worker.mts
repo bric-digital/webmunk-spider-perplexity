@@ -24,25 +24,34 @@ const stringToId = function (str:string) {
   return id * 10000 + 7964
 }
 
-const urlFilter = '||perplexity.ai/'
+const urlFilters = [
+  '||perplexity.ai/',
+  '||onedrive.live.com/',
+  '||sharepoint.com/'
+]
 
-console.log(`urlFilter: ${urlFilter}`)
+let stripRules = []
 
-const stripRule = {
-  id: stringToId('perplexity-strip'),
-  priority: 1,
-  action: {
-    type: 'modifyHeaders' as const,
-    responseHeaders: [
-      { header: 'x-frame-options', operation: 'remove' as const },
-      { header: 'content-security-policy', operation: 'remove' as const }
-    ]
-  },
-  condition: { urlFilter, resourceTypes: ['main_frame' as const, 'sub_frame' as const] }
+for (let urlFilter of urlFilters) {
+  console.log(`urlFilter: ${urlFilter}`)
+
+  stripRules.push({
+    id: stringToId(`perplexity-strip-${urlFilter}`),
+    priority: 1,
+    action: {
+      type: 'modifyHeaders' as const,
+      responseHeaders: [
+        { header: 'x-frame-options', operation: 'remove' as const },
+        { header: 'content-security-policy', operation: 'remove' as const }
+      ]
+    },
+    condition: { urlFilter, resourceTypes: ['main_frame' as const, 'sub_frame' as const] }
+  })
 }
 
+
 chrome.declarativeNetRequest.updateSessionRules({
-  addRules: [stripRule]
+  addRules: stripRules
 }, () => {
   if (chrome.runtime['lastError']) {
     console.log('[chrome.declarativeNetRequest] ' + chrome.runtime['lastError'].message)
