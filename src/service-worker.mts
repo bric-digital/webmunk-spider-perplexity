@@ -45,7 +45,11 @@ const stripRule = {
   condition: { urlFilter, resourceTypes: ['main_frame' as const, 'sub_frame' as const] }
 }
 
-chrome.declarativeNetRequest.updateSessionRules({
+chrome.declarativeNetRequest.onRuleMatchedDebug.addListener(function (matchedRule) {
+  console.log('[SPIDER] rule matched:', matchedRule);
+});
+
+chrome.declarativeNetRequest.updateDynamicRules({ // updateSessionRules({
   addRules: [stripRule]
 }, () => {
   if (chrome.runtime['lastError']) {
@@ -54,10 +58,6 @@ chrome.declarativeNetRequest.updateSessionRules({
     console.log(`urlFilter: ${urlFilter} installed`)
   }
 })
-
-chrome.declarativeNetRequest.onRuleMatchedDebug.addListener(function (o) {
-  console.log('rule matched:', o);
-});
 
 const perplexitySpider = new WebmunkPerplexitySpider()
 
