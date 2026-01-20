@@ -1,6 +1,12 @@
+import $ from 'jquery'
+
 import webmunkSpiderManager, { WebmunkContentSpider } from '@bric/webmunk-spider/spider'
 
 export class WebmunkPerplexityContentSpider extends WebmunkContentSpider {
+  toString():string {
+    return 'WebmunkPerplexityContentSpider'
+  }
+
   urlMatches(url:string): boolean {
     if (window.location.href.toLowerCase() === 'https://www.perplexity.ai/') {
       return true // Login check page
