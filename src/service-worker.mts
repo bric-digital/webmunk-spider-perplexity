@@ -59,7 +59,7 @@ chrome.declarativeNetRequest.updateSessionRules({ // updateSessionRules({
     console.log(`[SPIDER] ${urlFilter} installed`)
 
     chrome.declarativeNetRequest.getSessionRules()
-      .then((rules) {
+      .then((rules) => {
         console.log('CONFIRM RULES')
         console.log(rules)
       })
