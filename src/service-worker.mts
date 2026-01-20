@@ -28,7 +28,7 @@ const urlFilter = '||perplexity.ai/'
 
 console.log(`urlFilter: ${urlFilter}`)
 
-const stripRule = {
+const stripRule:Rule = {
   id: stringToId('perplexity-strip'),
   priority: 1,
   action: {
@@ -38,7 +38,7 @@ const stripRule = {
       { header: 'content-security-policy', operation: 'remove' }
     ]
   },
-  condition: { urlFilter, resourceTypes: ['main_frame', 'sub_frame'] }
+  condition: { urlFilter, resourceTypes: ['main_frame' as const, 'sub_frame' as const] }
 }
 
 chrome.declarativeNetRequest.updateSessionRules({
