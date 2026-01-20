@@ -38,7 +38,7 @@ const stripRule = {
       { header: 'content-security-policy', operation: 'remove' }
     ]
   },
-  condition: { urlFilter, resourceTypes: ['main_frame', 'sub_frame'] }
+  condition: { urlFilter, resourceTypes: ['main_frame' as ResourceType, 'sub_frame' as ResourceType] }
 }
 
 chrome.declarativeNetRequest.updateSessionRules({
