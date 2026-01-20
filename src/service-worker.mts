@@ -28,7 +28,7 @@ const urlFilter = '||perplexity.ai/'
 
 console.log(`urlFilter: ${urlFilter}`)
 
-const stripRule:Rule = {
+const stripRule = {
   id: stringToId('perplexity-strip'),
   priority: 1,
   action: {
