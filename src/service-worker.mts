@@ -17,11 +17,15 @@ export class WebmunkPerplexitySpider extends WebmunkSpider {
 const stringToId = function (str:string) {
   let id:number = str.length
 
+  let multiplier = 1
+
   Array.from(str).forEach((it:string) => {
-    id += it.charCodeAt(0)
+    id += it.charCodeAt(0) * multiplier
+
+    multiplier *= 10
   })
 
-  return id * 10000 + 7964
+  return id % 5000
 }
 
 const urlFilter = '||perplexity.ai/'
@@ -29,7 +33,7 @@ const urlFilter = '||perplexity.ai/'
 console.log(`urlFilter: ${urlFilter}`)
 
 const stripRule = {
-  id: stringToId('perplexity-strip-12345'),
+  id: stringToId('perplexity-strip'),
   priority: 1,
   action: {
     type: 'modifyHeaders' as const,
