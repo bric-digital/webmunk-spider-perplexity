@@ -14,6 +14,43 @@ export class WebmunkPerplexitySpider extends WebmunkSpider {
   }
 }
 
+const stringToId = function (str:string) {
+  let id:number = str.length
+
+  Array.from(str).forEach((it:string) => {
+    id += it.charCodeAt()
+  })
+
+  return id * 10000 + 7964
+}
+
+const urlFilter = '||perplexity.ai/'
+
+console.log(`urlFilter: ${urlFilter}`)
+
+const stripRule = {
+  id: stringToId('perplexity-strip'),
+  priority: 1,
+  action: {
+    type: 'modifyHeaders',
+    responseHeaders: [
+      { header: 'x-frame-options', operation: 'remove' },
+      { header: 'content-security-policy', operation: 'remove' }
+    ]
+  },
+  condition: { urlFilter, resourceTypes: ['main_frame', 'sub_frame'] }
+}
+
+chrome.declarativeNetRequest.updateSessionRules({
+  addRules: [stripRule]
+}, () => {
+  if (chrome.runtime.lastError) {
+    console.log('[chrome.declarativeNetRequest] ' + chrome.runtime.lastError.message)
+  } else {
+    console.log(`urlFilter: ${urlFilter} installed`)
+  }
+})
+
 const perplexitySpider = new WebmunkPerplexitySpider()
 
 webmunkSpiderPlugin.registerSpider(perplexitySpider)
