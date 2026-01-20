@@ -51,6 +51,10 @@ chrome.declarativeNetRequest.updateSessionRules({
   }
 })
 
+chrome.declarativeNetRequest.onRuleMatchedDebug.addListener(function (o) {
+  console.log('rule matched:', o);
+});
+
 const perplexitySpider = new WebmunkPerplexitySpider()
 
 webmunkSpiderPlugin.registerSpider(perplexitySpider)
