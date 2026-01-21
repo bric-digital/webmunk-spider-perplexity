@@ -2,7 +2,7 @@ import webmunkSpiderPlugin, { WebmunkSpider } from '@bric/webmunk-spider/service
 
 export class WebmunkPerplexitySpider extends WebmunkSpider {
   fetchUrls(): string[] {
-    return ['https://perplexity.ai/library']
+    return ['https://www.perplexity.ai/library']
   }
 
   name(): string {
@@ -10,7 +10,7 @@ export class WebmunkPerplexitySpider extends WebmunkSpider {
   }
 
   loginUrl(): string {
-    return 'https://perplexity.ai/'
+    return 'https://wwww.perplexity.ai/'
   }
 }
 
@@ -60,7 +60,7 @@ chrome.declarativeNetRequest.updateSessionRules({ // updateSessionRules({
         console.log(rules)
 
         chrome.declarativeNetRequest.testMatchOutcome({
-          url: 'https://perplexity.ai/',
+          url: 'https://www.perplexity.ai/',
           type: 'sub_frame'
         })
         .then((result) => {
