@@ -69,7 +69,7 @@ chrome.declarativeNetRequest.updateSessionRules({ // updateSessionRules({
         })
         .then((result) => {
           console.log('TEST RESULT')
-          console.log(\result)
+          console.log(result)
         })
       })
   }
