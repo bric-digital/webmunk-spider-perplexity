@@ -40,6 +40,7 @@ export class WebmunkPerplexityContentSpider extends WebmunkContentSpider {
 
       if (window.location.href.toLowerCase() === 'https://www.perplexity.ai/') {
         console.log(`[${this.name()}]: CHECKING LOGIN...`)
+        console.log($('div[data-testid="login-modal"]').length)
 
         if ($('div[data-testid="login-modal"]').length > 0) { // Logged in...
           console.log(`[${this.name()}]: Sending needs login...`)
