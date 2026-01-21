@@ -35,6 +35,8 @@ export class WebmunkPerplexityContentSpider extends WebmunkContentSpider {
     //   loggedIn: false
     // }
 
+    console.log('[perplexity] fetchResults')
+
     window.setTimeout(() => {
       console.log(`[${this.name()}]: fetchResults... ${window.location.href.toLowerCase()}`)
 
