@@ -39,7 +39,7 @@ const stripRule = {
     type: 'modifyHeaders' as const,
     responseHeaders: [
       { header: 'X-Frame-Options', operation: 'remove' as const },
-      { header: 'Content-Security-Policy', operation: 'set' as const, value: 'frame-ancestors \'self\' chrome-extension://pmambgglfkbbchljboelkjcmlaajmmaj' }
+      { header: 'Content-Security-Policy', operation: 'remove' as const }
     ]
   },
   condition: { urlFilter, resourceTypes: ['sub_frame' as const, 'main_frame' as const, 'other' as const] }
