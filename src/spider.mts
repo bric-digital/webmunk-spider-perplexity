@@ -60,11 +60,9 @@ export class WebmunkPerplexityContentSpider extends WebmunkContentSpider {
           })
         }
         return
-      } else if (window.location.href.toLowerCase() === 'https://chatgpt.com/') {
+      } else if (window.location.href.toLowerCase() === 'https://www.perplexity.ai/library') {
         console.log(`${this.name()}: Looking for links...`)
         let urls = []
-
-        $('button[data-testid="open-sidebar-button"]').trigger('click')
 
         window.setTimeout(() => {
           $('a').each((index, item) => {
@@ -72,8 +70,8 @@ export class WebmunkPerplexityContentSpider extends WebmunkContentSpider {
 
             console.log(`${this.name()}: checking ${href}...`)
 
-            if (href.startsWith('/c/')) {
-              urls.push(`https://chatgpt.com${href}`)
+            if (href.startsWith('/search/')) {
+              urls.push(`https://www.perplexity.ai${href}`)
             }
           })
 
@@ -85,28 +83,25 @@ export class WebmunkPerplexityContentSpider extends WebmunkContentSpider {
         }, 2000)
 
         return
-      } else if (window.location.href.toLowerCase().startsWith('https://chatgpt.com/c/')) {
+      } else if (window.location.href.toLowerCase().startsWith('https://www.perplexity.ai/search/')) {
         let conversation = []
 
-        $('article').each((index, item) => {
-          if ($(item).attr('data-turn') === 'user') {
-            $(item).find('div.whitespace-pre-wrap').each((turnIndex, turn) => {
-              conversation.push({
-                speaker: 'user',
-                content: $(turn).text(),
-              })
+        $('.group/query').each((index, item) => {
+          $(item).find('.select-text').each((turnIndex, turn) => {
+            conversation.push({
+              speaker: 'user',
+              content: $(turn).text(),
             })
-          } else if ($(item).attr('data-turn') === 'assistant') {
-            $(item).find('div[data-message-author-role="assistant"]').each((turnIndex, turn) => {
-              const htmlContent = $(turn).find('div.prose').html()
+          })
+        })
 
-              conversation.push({
-                speaker: 'ChatGPT',
-                model: $(turn).attr('data-message-model-slug'),
-                content: htmlContent
-              })
+        $('.prose').each((index, item) => {
+          $(item).find('.select-text').each((turnIndex, turn) => {
+            conversation.push({
+              speaker: 'user',
+              content: $(turn).html(),
             })
-          }
+          })
         })
 
         chrome.runtime.sendMessage({
