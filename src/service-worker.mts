@@ -45,10 +45,6 @@ const stripRule = {
   condition: { urlFilter, resourceTypes: ['sub_frame' as const, 'main_frame' as const, 'other' as const] }
 }
 
-chrome.declarativeNetRequest.onRuleMatchedDebug.addListener(function (matchedRule) {
-  console.log('[SPIDER] rule matched:', matchedRule);
-});
-
 chrome.declarativeNetRequest.updateSessionRules({ // updateSessionRules({
   removeRuleIds: [stripRule.id],
   addRules: [stripRule]
@@ -64,7 +60,7 @@ chrome.declarativeNetRequest.updateSessionRules({ // updateSessionRules({
         console.log(rules)
 
         chrome.declarativeNetRequest.testMatchOutcome({
-          url: 'https://www.perplexity.ai/',
+          url: 'https://chatgpt.com/',
           type: 'sub_frame'
         })
         .then((result) => {
@@ -74,6 +70,10 @@ chrome.declarativeNetRequest.updateSessionRules({ // updateSessionRules({
       })
   }
 })
+
+chrome.declarativeNetRequest.onRuleMatchedDebug.addListener(function (matchedRule) {
+  console.log('[SPIDER] rule matched:', matchedRule);
+});
 
 const perplexitySpider = new WebmunkPerplexitySpider()
 
