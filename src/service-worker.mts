@@ -10,7 +10,7 @@ export class WebmunkPerplexitySpider extends WebmunkSpider {
   }
 
   loginUrl(): string {
-    return 'https://wwww.perplexity.ai/'
+    return 'https://www.perplexity.ai/'
   }
 }
 
@@ -72,7 +72,7 @@ chrome.declarativeNetRequest.updateSessionRules({ // updateSessionRules({
 })
 
 chrome.declarativeNetRequest.onRuleMatchedDebug.addListener(function (matchedRule) {
-  console.log('[SPIDER] rule matched:', matchedRule);
+  console.log('[SPIDER PERPLEX] rule matched:', matchedRule);
 });
 
 const perplexitySpider = new WebmunkPerplexitySpider()
