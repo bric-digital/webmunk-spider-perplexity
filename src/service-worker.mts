@@ -12,6 +12,18 @@ export class WebmunkPerplexitySpider extends WebmunkSpider {
   loginUrl(): string {
     return 'https://www.perplexity.ai/'
   }
+
+  fetchInitialUrls(): string[] {
+    return ['https://www.perplexity.ai/library/']
+  }
+
+  checkNeedsUpdate(): Promise<boolean> {
+    return new Promise<boolean>((resolve) => {
+      // TODO - more advanced checking for actual changes...
+
+      resolve(true)
+    })
+  }
 }
 
 const stringToId = function (str:string) {
