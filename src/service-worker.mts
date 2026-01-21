@@ -28,7 +28,7 @@ const stringToId = function (str:string) {
   return id % 5000
 }
 
-const urlFilter = '*' // '||perplexity.ai/'
+const urlFilter = '||perplexity.ai/'
 
 console.log(`urlFilter: ${urlFilter}`)
 
@@ -42,7 +42,7 @@ const stripRule = {
       { header: 'Content-Security-Policy', operation: 'remove' as const }
     ]
   },
-  condition: { urlFilter, resourceTypes: ['main_frame' as const, 'sub_frame' as const] }
+  condition: { urlFilter, resourceTypes: ['sub_frame' as const] }
 }
 
 chrome.declarativeNetRequest.onRuleMatchedDebug.addListener(function (matchedRule) {
@@ -62,6 +62,15 @@ chrome.declarativeNetRequest.updateSessionRules({ // updateSessionRules({
       .then((rules) => {
         console.log('CONFIRM RULES')
         console.log(rules)
+
+        chrome.declarativeNetRequest.testMatchOutcome({
+          url: 'https://www.perplexity.ai/',
+          type: 'sub_frame'
+        })
+        .then((result) => {
+          console.log('TEST RESULT')
+          console.log(\result)
+        })
       })
   }
 })
