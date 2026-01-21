@@ -42,7 +42,23 @@ const stripRule = {
       { header: 'Content-Security-Policy', operation: 'remove' as const }
     ]
   },
-  condition: { urlFilter, resourceTypes: ['sub_frame' as const, 'main_frame' as const, 'other' as const] }
+  condition: { urlFilter, resourceTypes: [
+    'main_frame' as const,
+    'sub_frame' as const,
+    'stylesheet' as const,
+    'script' as const,
+    'image' as const,
+    'font' as const,
+    'object' as const,
+    'xmlhttprequest' as const,
+    'ping' as const,
+    'csp_report' as const,
+    'media' as const,
+    'websocket' as const,
+    'webtransport' as const,
+    'webbundle' as const,
+    'other' as const
+  ] }
 }
 
 chrome.declarativeNetRequest.updateSessionRules({ // updateSessionRules({
