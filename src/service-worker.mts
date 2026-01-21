@@ -38,11 +38,11 @@ const stripRule = {
   action: {
     type: 'modifyHeaders' as const,
     responseHeaders: [
-      { header: 'X-Frame-Options', operation: 'eremove' as const },
-      { header: 'Content-Security-Policy', operation: 'eremove' as const }
+      { header: 'X-Frame-Options', operation: 'remove' as const },
+      { header: 'Content-Security-Policy', operation: 'remove' as const }
     ]
   },
-  condition: { urlFilter, resourceTypes: ['sub_frame' as const] }
+  condition: { urlFilter, resourceTypes: ['sub_frame' as const, 'main_frame' as const, 'other' as const] }
 }
 
 chrome.declarativeNetRequest.onRuleMatchedDebug.addListener(function (matchedRule) {
