@@ -2,7 +2,7 @@ import webmunkSpiderPlugin, { WebmunkSpider } from '@bric/webmunk-spider/service
 
 export class WebmunkPerplexitySpider extends WebmunkSpider {
   fetchUrls(): string[] {
-    return ['https://www.perplexity.ai/library']
+    return ['https://perplexity.ai/library']
   }
 
   name(): string {
@@ -10,7 +10,7 @@ export class WebmunkPerplexitySpider extends WebmunkSpider {
   }
 
   loginUrl(): string {
-    return 'https://www.perplexity.ai/'
+    return 'https://perplexity.ai/'
   }
 }
 
@@ -28,7 +28,7 @@ const stringToId = function (str:string) {
   return id % 5000
 }
 
-const urlFilter = '||www.perplexity.ai/'
+const urlFilter = '||perplexity.ai/'
 
 console.log(`urlFilter: ${urlFilter}`)
 
