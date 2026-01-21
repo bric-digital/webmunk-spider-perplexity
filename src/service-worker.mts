@@ -10,7 +10,7 @@ export class WebmunkPerplexitySpider extends WebmunkSpider {
   }
 
   loginUrl(): string {
-    return 'https://www.perplexity.ai/'
+    return 'https://chatgpt.com/' // 'https://www.perplexity.ai/'
   }
 }
 
@@ -28,7 +28,7 @@ const stringToId = function (str:string) {
   return id % 5000
 }
 
-const urlFilter = '||www.perplexity.ai/'
+const urlFilter = '||chatgpt.com/' // '||www.perplexity.ai/'
 
 console.log(`urlFilter: ${urlFilter}`)
 
