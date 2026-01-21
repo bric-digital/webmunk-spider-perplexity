@@ -28,7 +28,7 @@ const stringToId = function (str:string) {
   return id % 5000
 }
 
-const urlFilter = '||perplexity.ai/'
+const urlFilter = '*' // '||perplexity.ai/'
 
 console.log(`urlFilter: ${urlFilter}`)
 
