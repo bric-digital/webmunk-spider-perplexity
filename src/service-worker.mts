@@ -10,7 +10,7 @@ export class WebmunkPerplexitySpider extends WebmunkSpider {
   }
 
   loginUrl(): string {
-    return 'https://chatgpt.com/' // 'https://www.perplexity.ai/'
+    return 'https://www.perplexity.ai/'
   }
 }
 
@@ -28,7 +28,7 @@ const stringToId = function (str:string) {
   return id % 5000
 }
 
-const urlFilter = '||chatgpt.com/' // '||www.perplexity.ai/'
+const urlFilter = '||www.perplexity.ai/'
 
 console.log(`urlFilter: ${urlFilter}`)
 
@@ -60,7 +60,7 @@ chrome.declarativeNetRequest.updateSessionRules({ // updateSessionRules({
         console.log(rules)
 
         chrome.declarativeNetRequest.testMatchOutcome({
-          url: 'https://chatgpt.com/',
+          url: 'https://perplexity.ai/',
           type: 'sub_frame'
         })
         .then((result) => {
